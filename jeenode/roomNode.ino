@@ -9,6 +9,8 @@
 // motion needs to be reported as soon as possible, but only once, while all the
 // other sensor values are being collected and averaged in a more regular cycle.
 
+// Original sketch: https://github.com/jcw/jeelib/blob/master/examples/RF12/roomNode/roomNode.ino
+
 #include <JeeLib.h>
 #include <PortsSHT11.h>
 #include <avr/sleep.h>
@@ -65,9 +67,9 @@ struct {
 #endif
 
 #if PIR_PORT
-    #define PIR_HOLD_TIME   30  // hold PIR value this many seconds after change
+    // #define PIR_HOLD_TIME   30  // hold PIR value this many seconds after change
     #define PIR_PULLUP      1   // set to one to pull-up the PIR input pin
-    #define PIR_INVERTED    1   // 0 or 1, to match PIR reporting high or low
+    #define PIR_INVERTED    0   // 0 or 1, to match PIR reporting high or low
     
     /// Interface to a Passive Infrared motion sensor.
     class PIR : public Port {
@@ -81,23 +83,27 @@ struct {
         void poll() {
             // see http://talk.jeelabs.net/topic/811#post-4734 for PIR_INVERTED
             byte pin = digiRead() ^ PIR_INVERTED;
-            // if the pin just went on, then set the changed flag to report it
-            if (pin) {
-                if (!state())
-                    changed = 1;
+
+            // if the pin changed then set the changed flag to report it
+            if (pin != state())
+                changed = 1;
+
+            if (pin)
                 lastOn = millis();
-            }
+
             value = pin;
         }
 
         // state is true if curr value is still on or if it was on recently
         byte state() const {
             byte f = value;
-            if (lastOn > 0)
-                ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
-                    if (millis() - lastOn < 1000 * PIR_HOLD_TIME)
-                        f = 1;
-                }
+            // Don't care about that stuff because the room board PIR have an internal hold time of about 30s
+            // that it handles correctly... and this soft-based PIR_HOLD_TIME causes a race-condition
+//            if (lastOn > 0)
+//                ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+//                    if (millis() - lastOn < 1000 * PIR_HOLD_TIME)
+//                        f = 1;
+//                }
             return f;
         }
 
