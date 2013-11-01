@@ -1,8 +1,8 @@
 // Testing AM2302 sensor (aka DHT22) on Jeenode with lib: https://github.com/nathanchantrell/Arduino-DHT22
 
 // NOTE:
-// - Humidity value seems correct
-// - Temperature seems 1.8 *C greater than correct value
+// - Humidity value seems almost the same as SHT11 value
+// - Temperature seems 1.8 *C greater than SHT11 value
 
 #include <DHT22.h>
 // Only used for sprintf

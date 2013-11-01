@@ -5,8 +5,8 @@
 // Modified by Aymerick for jeenode use
 
 // NOTE:
-// - Humidity value seems correct
-// - Temperature seems 1.8 *C greater than correct value
+// - Humidity value seems almost the same as SHT11 value
+// - Temperature seems 1.8 *C greater than SHT11 value
 
 #include "DHT.h"
 
