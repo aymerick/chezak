@@ -8,7 +8,7 @@
 // Only used for sprintf
 #include <stdio.h>
 
-// Data wire is plugged int jeenode Port 1 DI01
+// Data wire is plugged into jeenode Port 1 DI01
 // Connect a 4.7K resistor between VCC and the data pin (strong pullup)
 #define DHT22_PIN 4
 
