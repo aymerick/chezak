@@ -4,10 +4,10 @@
 
 #include <DHT22.h>
 
-// Power wire is plugged into jeenode Port 4 DI04 (arduino: digital 7)
-#define DHTPowerPin 7
-// Data wire is plugged into jeenode Port 1 DI01 (arduino: digital 4)
-#define DHTDataPin  4
+// Power wire is plugged into jeenode DI03 (arduino: digital 6)
+#define DHTPowerPin 6
+// Data wire is plugged into jeenode DI02 (arduino: digital 5)
+#define DHTDataPin 5
 
 DHT22 myDHT22(DHTDataPin);
 
