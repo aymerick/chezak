@@ -43,7 +43,7 @@ struct {
   byte light;     // light sensor: 0..255
   byte lobat :1;  // supply voltage dropped under 3.1V: 0..1
   byte humi  :7;  // humidity: 0..100
-  int  temp  :10; // temperature: -500..+500 (tenths)
+  int  temp  :10; // temperature: -512..+512 (tenths)
 } payload;
 
 DHT22 sensorDHT22(DHT22_DATA_PIN);
@@ -133,7 +133,18 @@ void readDHT22() {
   switch(errorCode)
   {
     case DHT_ERROR_NONE:
-      payload.temp = sensorDHT22.getTemperatureCInt();
+      short int temp;
+
+      // temperature value in send in payload on 10bits, so we keep only temperatures between -51.2 and 51.2
+      temp = sensorDHT22.getTemperatureCInt();
+      if (temp > 512) {
+        temp = 512;
+      }
+      if (temp < -512) {
+        temp = -512;
+      }
+
+      payload.temp = temp;
       payload.humi = sensorDHT22.getHumidityInt() / 10;
       break;
 #if DEBUG
