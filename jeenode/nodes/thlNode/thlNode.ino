@@ -1,16 +1,16 @@
 //
-// Temperature Humidity Light Node
+// Chezak Node - Temperature Humidity Light
 //
 // Sensors:
 //  - DHT22 for temperature and humidity
 //  - LDR for light
 //
-
 // References:
 //  - http://jeelabs.net/projects/hardware/wiki/JeeNode
 //  - http://jeelabs.org/2011/12/13/developing-a-low-power-sketch/
 //  - https://github.com/nathanchantrell/TinyTX/blob/master/TinyTX_DHT22/TinyTX_DHT22.ino
 //  - https://github.com/mharizanov/TinySensor/blob/master/Funky_DHT22/Funky_DHT22.ino
+//
 
 #include <JeeLib.h>
 #include <DHT22.h>
@@ -34,6 +34,9 @@ ISR(WDT_vect) { Sleepy::watchdogEvent(); }
 
 // how often to report
 #define REPORT_PERIOD 3000
+
+
+// @todo Ack mode !
 
 
 static byte myNodeID;
@@ -135,7 +138,7 @@ void readDHT22() {
     case DHT_ERROR_NONE:
       short int temp;
 
-      // temperature value in send in payload on 10bits, so we keep only temperatures between -51.2 and 51.2
+      // temperature value is send in payload on 10bits, so we keep only temperatures between -51.2 and 51.2
       temp = sensorDHT22.getTemperatureCInt();
       if (temp > 512) {
         temp = 512;
@@ -207,11 +210,6 @@ void setup() {
 }
 
 void loop() {
-#if DEBUG
-  Serial.print('.');
-  serialFlush();
-#endif
-
   // read sensors
   readLDR();
   readLowBat();

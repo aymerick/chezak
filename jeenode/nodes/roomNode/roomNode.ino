@@ -1,3 +1,14 @@
+//
+// Chezak Node - Jeelabs official Room Board (http://jeelabs.com/products/room-board)
+//
+// Original sketch: https://github.com/jcw/jeelib/blob/master/examples/RF12/roomNode/roomNode.ino
+//
+// Sensors:
+//  - SHT11 for temperature and humidity
+//  - LDR for light
+//  - PIR for motion
+//
+
 /// @dir roomNode
 /// New version of the Room Node (derived from rooms.pde).
 // 2010-10-19 <jc@wippler.nl> http://opensource.org/licenses/mit-license.php
@@ -8,8 +19,6 @@
 // The complexity in the code below comes from the fact that newly detected PIR
 // motion needs to be reported as soon as possible, but only once, while all the
 // other sensor values are being collected and averaged in a more regular cycle.
-
-// Original sketch: https://github.com/jcw/jeelib/blob/master/examples/RF12/roomNode/roomNode.ino
 
 #include <JeeLib.h>
 #include <PortsSHT11.h>
