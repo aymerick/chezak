@@ -35,6 +35,10 @@ ISR(WDT_vect) { Sleepy::watchdogEvent(); }
 // how often to report
 #define REPORT_PERIOD 3000
 
+// set the sync mode to 2 if the fuses are still the Arduino default
+// mode 3 (full powerdown) can only be used with 258 CK startup fuses
+#define RADIO_SYNC_MODE 2
+
 
 // @todo Ack mode !
 
