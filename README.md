@@ -1,6 +1,6 @@
 chezak
 ======
 
-Programming my house
+Experimenting arduino/jeenode stuff
 
-jeego moved to: https://github.com/aymerick/jeego
+Jeego moved to: https://github.com/aymerick/jeego

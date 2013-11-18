@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 #
+# Script reading output from an USB-plugged central Jeenode (eg: JeeLink)
+#
 # Needs pySerial: http://pythonhosted.org/pyserial/
 # Install pySerial on Mac: $ sudo easy_install -U pyserial
 #
